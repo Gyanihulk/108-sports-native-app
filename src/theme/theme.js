@@ -13,4 +13,3 @@ export const theme = {
         tabBarInactive: colors.white,
     },
 };
-
