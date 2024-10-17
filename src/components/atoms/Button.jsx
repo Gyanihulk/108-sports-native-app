@@ -45,10 +45,7 @@ const sizes = {
 
 const Button = ({ onPress, title, variant = "primary", size = "medium", style, textStyle }) => {
     return (
-        <TouchableOpacity
-            style={[styles.button, variants[variant], sizes[size], style]}
-            onPress={onPress}
-        >
+        <TouchableOpacity style={[styles.button, variants[variant], sizes[size], style]} onPress={onPress}>
             <Text
                 style={[
                     styles.buttonText,

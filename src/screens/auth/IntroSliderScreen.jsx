@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ProgressBar from "@components/molecules/ProgressBar";
+import ProgressBar from "@components/molecules/introSlider/ProgressBar";
 import Button from "@components/atoms/Button";
 
-import { IntroSliderStepOne } from "@components/organisms/IntroSliderStepOne";
-import { IntroSliderStepTwo } from "@components/organisms/IntroSliderStepTwo";
-import { IntroSliderStepThree } from "@components/organisms/IntroSliderStepThree";
-import { IntroSliderStepFour } from "@components/organisms/IntroSliderStepFour";
-import { IntroSliderStepFive } from "../../components/organisms/IntroSliderStepFive";
-
+import { IntroSliderStepOne } from "@components/organisms/introSlider/IntroSliderStepOne";
+import { IntroSliderStepTwo } from "@components/organisms/introSlider/IntroSliderStepTwo";
+import { IntroSliderStepThree } from "@components/organisms/introSlider/IntroSliderStepThree";
+import { IntroSliderStepFour } from "@components/organisms/introSlider/IntroSliderStepFour";
+import { IntroSliderStepFive } from "@components/organisms/introSlider/IntroSliderStepFive";
+import { IntroSliderStepSix } from "@components/organisms/introSlider/IntroSliderStepSix";
+import IntroSliderStepSeven from "@components/organisms/introSlider/IntroSliderStepSeven";
+import { colors } from "@theme/colors";
 
 export const IntroSliderScreen = () => {
-    const [currentStep, setCurrentStep] = useState(4);
+    const [currentStep, setCurrentStep] = useState(7);
 
     const handleNextStep = () => {
         if (currentStep < 7) {
@@ -31,8 +33,11 @@ export const IntroSliderScreen = () => {
             case 4:
                 return <IntroSliderStepFour />;
             case 5:
-      return <IntroSliderStepFive/>
-
+                return <IntroSliderStepFive />;
+            case 6:
+                return <IntroSliderStepSix />;
+                case 7:
+                    return <IntroSliderStepSeven />;
             default:
                 return <IntroSliderStepOne />;
         }
@@ -42,7 +47,7 @@ export const IntroSliderScreen = () => {
             <ProgressBar currentStep={currentStep} totalSteps={7} />
 
             {renderCurrentStep()}
-            <Button title="Next" onPress={handleNextStep} size="large" textStyle={{ color: "black" }} />
+            {currentStep <7 && <Button title="Next" onPress={handleNextStep} size="large" textStyle={{ color: "black" }} />}
         </SafeAreaView>
     );
 };
@@ -52,18 +57,18 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-between",
         padding: 20,
-        backgroundColor: "#000",
+        backgroundColor: colors.backgroundDark
     },
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        color: "#fff",
+        color: colors.text,
         textAlign: "center",
         marginVertical: 10,
     },
     subtitle: {
         fontSize: 16,
-        color: "#aaa",
+        color:  colors.text,
         textAlign: "center",
         marginBottom: 20,
     },
@@ -75,7 +80,7 @@ const styles = StyleSheet.create({
     },
     smallBoxContainer: {
         position: "absolute",
-        top: "40%", // Adjust this to position the boxes correctly over the image
+        top: "40%", 
         left: 0,
         right: 0,
         flexDirection: "row",

@@ -10,7 +10,7 @@ const ProgressBar = ({ currentStep, totalSteps }) => {
         <View style={styles.progressBar}>
             {stepsArray.map((step, index) => (
                 <React.Fragment key={step}>
-                    <ProgressStep isActive={step <= currentStep} stepNumber={step} />
+                    <ProgressStep isActive={step < currentStep} stepNumber={step} />
                     {index !== totalSteps - 1 && <View style={styles.connector} />}
                 </React.Fragment>
             ))}
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        marginVertical: 30,
+        marginVertical: 10,
     },
     connector: {
         width: 25,

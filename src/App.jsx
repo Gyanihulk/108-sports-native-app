@@ -5,12 +5,16 @@ import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, 
 import Navigation from "@navigation";
 import { ThemeProvider } from "@rneui/themed";
 import { theme as appTheme } from "@theme/theme";
+import store from "@stores";
+import { Provider } from "react-redux";
 
 function App() {
     return (
-        <ThemeProvider theme={appTheme}>
-            <Navigation />
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={appTheme}>
+                <Navigation />
+            </ThemeProvider>
+        </Provider>
     );
 }
 

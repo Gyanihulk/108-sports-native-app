@@ -2,7 +2,8 @@ import React from "react";
 import { Image, StyleSheet, View, Text, TextInput, FlatList, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { colors } from "@theme/colors";
-import Button from "../atoms/Button";
+import Button from "@components/atoms/Button";
+import { styles as baseStyles } from "@components/organisms/introSlider/styles";
 
 const competitions = [
     {
@@ -34,33 +35,35 @@ const competitions = [
 const CompetitionCard = ({ name, country, image }) => {
     return (
         <View style={styles.card}>
+            {/* Favorite Icon */}
+            <TouchableOpacity style={styles.favoriteIcon}>
+                <Icon name="star-o" size={12} color="rgba(255, 255, 255, 0.5)" />
+            </TouchableOpacity>
+
             {/* Competition Image */}
             <View style={styles.imageContainer}>
                 <Image source={image} style={styles.cardImage} />
             </View>
 
-            {/* Competition Details */}
-            <View style={styles.textContainer}>
-                <Text style={styles.cardTitle}>{name}</Text>
-                <Text style={styles.cardSubtitle}>{country}</Text>
-            </View>
-
-            {/* Favorite Icon */}
-            <TouchableOpacity style={styles.favoriteIcon}>
-                <Icon name="star-o" size={16} color="rgba(255, 255, 255, 0.5)" />
-            </TouchableOpacity>
+            {/* Competition Name and Country */}
+            <Text style={styles.cardTitle}>{name}</Text>
+            <Text style={styles.cardSubtitle}>{country}</Text>
         </View>
     );
 };
-export const IntroSliderStepFive = () => {
+export const IntroSliderStepFour = () => {
     return (
         <>
             <Text style={styles.title}>Favorite Competitions</Text>
             <Text style={styles.subtitle}>Receive notifications about matches of your favorite competitions.</Text>
 
             {/* Search Box */}
-            <View style={styles.searchContainer}>
-                <TextInput style={styles.searchBox} placeholder="Search Competitions" placeholderTextColor={colors.black} />
+            <View style={styles.search.searchContainer}>
+                <TextInput
+                    style={styles.search.searchBox}
+                    placeholder="Search Competitions"
+                    placeholderTextColor={colors.black}
+                />
             </View>
 
             {/* Competition Cards */}
@@ -70,7 +73,7 @@ export const IntroSliderStepFive = () => {
                     <CompetitionCard name={item.name} country={item.country} image={item.image} />
                 )}
                 keyExtractor={(item) => item.id.toString()}
-                
+                numColumns={2}
                 contentContainerStyle={styles.competitionList}
             />
 
@@ -79,78 +82,49 @@ export const IntroSliderStepFive = () => {
                 onPress={() => {}}
                 size="large"
                 variant={"outline"}
-                style={{ borderColor: "#262628" }} 
-                textStyle={{ color: colors.text }}
+                style={{ borderColor: "#262628" }}
+                textStyle={{ color: colors.text, fontWeight: "200", fontSize: 15 }}
             />
         </>
     );
 };
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 24,
-        fontWeight: "bold",
-        color: "#fff",
-        textAlign: "center",
-        marginTop: 5,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: "#aaa",
-        textAlign: "center",
-        marginBottom: 10,
-    },
-    searchContainer: {
-        width: "100%",
-        alignSelf: "center",
-    },
-    searchBox: {
-        backgroundColor: "#fff",
-        borderRadius: 10,
-        paddingVertical: 5,
-        paddingHorizontal: 15,
-        color: "#000",
-        fontSize: 16,
-    },
+    ...baseStyles,
     competitionList: {
-        justifyContent: "center",
-        paddingHorizontal: 0,
+        justifyContent: "space-between",
         marginVertical: 10,
         width: "100%",
+        paddingHorizontal: 0,
+        gap: 10,
     },
     card: {
-        flexDirection: "row",  // Horizontal layout
+        flex: 1,
         backgroundColor: "#2C2C2E",
-        marginVertical: 10,
         borderRadius: 10,
         alignItems: "center",
         padding: 15,
         position: "relative",
-        height: 80,  // Adjust the height as per your design
+        marginHorizontal: 5,
     },
     imageContainer: {
-        width: 50,
-        height: 50,
+        display: "flex",
+        width: 60,
+        height: 60,
         backgroundColor: "black",
-        borderRadius: 25,  // Circular image
+        borderRadius: 30,
         alignItems: "center",
         justifyContent: "center",
-        marginRight: 15,  // Spacing between image and text
+        marginBottom: 7,
     },
     cardImage: {
-        width: "70%",
-        height: "70%",
-        resizeMode: "contain",  // Keep the image within the circular container
-    },
-    textContainer: {
-        flex: 1,  // Takes up remaining space
-        justifyContent: "center",
+        width: "50%",
+        height: "50%",
     },
     cardTitle: {
         color: "#fff",
         fontSize: 16,
         fontWeight: "bold",
-        marginBottom: 3,
     },
     cardSubtitle: {
         color: "#aaa",
@@ -158,11 +132,11 @@ const styles = StyleSheet.create({
     },
     favoriteIcon: {
         position: "absolute",
-        top: 15,
-        right: 15,
-        backgroundColor: "#1C1C1E",
-        borderRadius: 50,
-        padding: 6,
+        top: 10,
+        right: 10,
+        backgroundColor: "black",
+        borderRadius: 100,
+        padding: 3,
     },
     viewMoreButton: {
         backgroundColor: "#1C1C1E",
@@ -179,4 +153,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default IntroSliderStepFive;
+export default IntroSliderStepFour;
