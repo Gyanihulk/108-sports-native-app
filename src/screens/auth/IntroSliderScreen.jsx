@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProgressBar from "@components/molecules/introSlider/ProgressBar";
 import Button from "@components/atoms/Button";
@@ -45,8 +45,10 @@ export const IntroSliderScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <ProgressBar currentStep={currentStep} totalSteps={7} />
-
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             {renderCurrentStep()}
+            </ScrollView>
+           
             {currentStep <7 && <Button title="Next" onPress={handleNextStep} size="large" textStyle={{ color: "black" }} />}
         </SafeAreaView>
     );
@@ -58,6 +60,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         padding: 20,
         backgroundColor: colors.backgroundDark
+    },
+    scrollViewContainer: {
+        flexGrow: 1, // Ensures ScrollView takes up remaining space
+        justifyContent: "center",
     },
     title: {
         fontSize: 24,

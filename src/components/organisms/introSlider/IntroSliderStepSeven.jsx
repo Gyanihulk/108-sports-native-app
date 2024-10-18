@@ -4,23 +4,29 @@ import MatchesPerDayStep1 from "@components/molecules/introSlider/MatchesPerDayS
 import ExperienceLevelStep from "@components/molecules/introSlider/ExperienceLevelStep";
 import PredictionInterestStep2 from "@components/molecules/introSlider/PredictionInterestStep2";
 import PredictionChartsStep3 from "@components/molecules/introSlider/PredictionChartsStep3";
-import DailyBudgetStep from "@components/molecules/introSlider/DailyBudgetStep";
+import DailyBudgetStep4 from "@components/molecules/introSlider/DailyBudgetStep4";
+import MonthlyReturnStep5 from "@components/molecules/introSlider/MonthlyReturnStep5";
 import MonthlyReturnStep from "@components/molecules/introSlider/MonthlyReturnStep";
 import { useSelector } from "react-redux";
 import Button from "@components/atoms/Button";
 import InfoModal from "@components/atoms/InfoModal";
 import { styles as baseStyles } from "@components/organisms/introSlider/styles";
 const IntroSliderStepSeven = () => {
-    const [step, setStep] = useState(3);
+    const [step, setStep] = useState(5);
     const [isModalVisible, setModalVisible] = useState(false); // Modal visibility
     const { experienceLevel, predictionInterest, dailyBudget, monthlyReturn } = useSelector((state) => state.form);
 
     const handleNextStep = () => {
+        if(step==3){
+            setStep(step + 1);
+            return
+        }
         setModalVisible(true); // Show modal when step is completed
     };
 
     const handleModalNext = () => {
         setModalVisible(false); // Close the modal
+      
         if (step < 3) {
             setStep(step + 1); // Proceed to next step
         } else {
@@ -60,14 +66,14 @@ const IntroSliderStepSeven = () => {
                         "You have selected Type of Predictions Are You Interested In. Let's proceed to the next step.",
                     image: require("@assets/images/sliderScreen/loading50.png"), // Replace with your actual image path
                 };
-            case 3:
+            case 4:
                 return {
                     title: "What is Your Daily Budget?",
-                    heading: "Perfect!",
-                    description: "You have selected your daily budget. Let's proceed to the next step.",
-                    image: require("@assets/images/sliderScreen/tick.png"), // Replace with your actual image path
+                    heading: "Wow!",
+                    description: "We strongly recommended not using the entire budget using Ai predictions",
+                    image: require("@assets/images/sliderScreen/wow.png"), // Replace with your actual image path
                 };
-            case 4:
+            case 5:
                 return {
                     title: "What is Your Monthly Return Target?",
                     heading: "Excellent!",
@@ -90,9 +96,9 @@ const IntroSliderStepSeven = () => {
             case 3:
                 return <PredictionChartsStep3 onNext={handleNextStep} />;
             case 4:
-                return <ExperienceLevelStep onNext={handleNextStep} />;
+                return <DailyBudgetStep4 onNext={handleNextStep} />;
             case 5:
-                return <DailyBudgetStep onNext={handleNextStep} />;
+                return <MonthlyReturnStep5 onNext={handleNextStep} />;
             case 6:
                 return <MonthlyReturnStep onNext={handleNextStep} />;
             default:
