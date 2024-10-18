@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateExperienceLevel } from "@stores/formSlice";
-import SelectionCard from "@components/atoms/SelectionCard"; 
+import SelectionCardsContainer from "@components/atoms/SelectionCardsContainer";
 
 const ExperienceLevelStep = ({ onNext }) => {
     const dispatch = useDispatch();
@@ -24,13 +24,14 @@ const ExperienceLevelStep = ({ onNext }) => {
     };
 
     return (
-        <SelectionCard
+        <SelectionCardsContainer
             title="What is Your Experience Level?"
             options={experienceOptions}
             selectedOption={selectedExperience}
             onSelect={handleSelect}
-            type="textOnly" 
-            cardVariant="fullLength" 
+            type="textOnly"
+            cardVariant="fullLengthIcon"
+            customStyles={{ optionText: { marginLeft: 13 } }}
         />
     );
 };

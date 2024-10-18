@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "@theme/colors";
-import { horizontalScale, verticalScale } from "../../../utils/DimenstionHelpers";
+import { horizontalScale, verticalScale } from "@utils/DimenstionHelpers";
 export const styles = StyleSheet.create({
     container: {
         flex: 1, 

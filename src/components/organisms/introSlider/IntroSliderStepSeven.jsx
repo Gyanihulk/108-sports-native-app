@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import MatchesPerDay from "@components/molecules/introSlider/MatchesPerDay";
+import MatchesPerDayStep1 from "@components/molecules/introSlider/MatchesPerDayStep1";
 import ExperienceLevelStep from "@components/molecules/introSlider/ExperienceLevelStep";
-import PredictionInterestStep from "@components/molecules/introSlider/PredictionInterestStep";
+import PredictionInterestStep2 from "@components/molecules/introSlider/PredictionInterestStep2";
+import PredictionChartsStep3 from "@components/molecules/introSlider/PredictionChartsStep3";
 import DailyBudgetStep from "@components/molecules/introSlider/DailyBudgetStep";
 import MonthlyReturnStep from "@components/molecules/introSlider/MonthlyReturnStep";
 import { useSelector } from "react-redux";
@@ -10,7 +11,7 @@ import Button from "@components/atoms/Button";
 import InfoModal from "@components/atoms/InfoModal";
 import { styles as baseStyles } from "@components/organisms/introSlider/styles";
 const IntroSliderStepSeven = () => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(3);
     const [isModalVisible, setModalVisible] = useState(false); // Modal visibility
     const { experienceLevel, predictionInterest, dailyBudget, monthlyReturn } = useSelector((state) => state.form);
 
@@ -53,12 +54,20 @@ const IntroSliderStepSeven = () => {
                 };
             case 2:
                 return {
+                    title: "Your Pridiction Interests",
+                    heading: "Loading Statistic...!",
+                    description:
+                        "You have selected Type of Predictions Are You Interested In. Let's proceed to the next step.",
+                    image: require("@assets/images/sliderScreen/loading50.png"), // Replace with your actual image path
+                };
+            case 3:
+                return {
                     title: "What is Your Daily Budget?",
                     heading: "Perfect!",
                     description: "You have selected your daily budget. Let's proceed to the next step.",
                     image: require("@assets/images/sliderScreen/tick.png"), // Replace with your actual image path
                 };
-            case 3:
+            case 4:
                 return {
                     title: "What is Your Monthly Return Target?",
                     heading: "Excellent!",
@@ -75,13 +84,16 @@ const IntroSliderStepSeven = () => {
             case 0:
                 return <ExperienceLevelStep onNext={handleNextStep} />;
             case 1:
-                return <MatchesPerDay onNext={handleNextStep} />;
+                return <MatchesPerDayStep1 onNext={handleNextStep} />;
             case 2:
-                return <PredictionInterestStep onNext={handleNextStep} />;
-
+                return <PredictionInterestStep2 onNext={handleNextStep} />;
+            case 3:
+                return <PredictionChartsStep3 onNext={handleNextStep} />;
             case 4:
-                return <DailyBudgetStep onNext={handleNextStep} />;
+                return <ExperienceLevelStep onNext={handleNextStep} />;
             case 5:
+                return <DailyBudgetStep onNext={handleNextStep} />;
+            case 6:
                 return <MonthlyReturnStep onNext={handleNextStep} />;
             default:
                 return <Text>All steps completed!</Text>;
@@ -91,7 +103,7 @@ const IntroSliderStepSeven = () => {
     const modalContent = getModalContent();
 
     return (
-        <View style={styles.container}>
+        <>
             <Text style={styles.title}>Personal Advisor</Text>
             <Text style={styles.subtitle}>
                 The advisor will help you choose the right strategy with AI Football predictions
@@ -107,7 +119,7 @@ const IntroSliderStepSeven = () => {
                 onNext={handleModalNext}
             />
             <Button title="Next" onPress={handleNextStep} size="large" textStyle={{ color: "black" }} />
-        </View>
+        </>
     );
 };
 const styles = StyleSheet.create({
