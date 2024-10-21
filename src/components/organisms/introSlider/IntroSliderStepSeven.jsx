@@ -6,28 +6,31 @@ import PredictionInterestStep2 from "@components/molecules/introSlider/Predictio
 import PredictionChartsStep3 from "@components/molecules/introSlider/PredictionChartsStep3";
 import DailyBudgetStep4 from "@components/molecules/introSlider/DailyBudgetStep4";
 import MonthlyReturnStep5 from "@components/molecules/introSlider/MonthlyReturnStep5";
-import MonthlyReturnStep from "@components/molecules/introSlider/MonthlyReturnStep";
+
 import { useSelector } from "react-redux";
 import Button from "@components/atoms/Button";
 import InfoModal from "@components/atoms/InfoModal";
 import { styles as baseStyles } from "@components/organisms/introSlider/styles";
+import OddsStep6 from "@components/molecules/introSlider/OddsStep6";
+import SpecialPredictionStep7 from "@components/molecules/introSlider/SpecialPredictionStep7";
+import OwnStrategyStep8 from "@components/molecules/introSlider/OwnStrategyStep8";
 const IntroSliderStepSeven = () => {
-    const [step, setStep] = useState(5);
+    const [step, setStep] = useState(7);
     const [isModalVisible, setModalVisible] = useState(false); // Modal visibility
     const { experienceLevel, predictionInterest, dailyBudget, monthlyReturn } = useSelector((state) => state.form);
 
     const handleNextStep = () => {
-        if(step==3){
+        if (step == 3) {
             setStep(step + 1);
-            return
+            return;
         }
         setModalVisible(true); // Show modal when step is completed
     };
 
     const handleModalNext = () => {
         setModalVisible(false); // Close the modal
-      
-        if (step < 3) {
+
+        if (step < 8) {
             setStep(step + 1); // Proceed to next step
         } else {
             // Submit the form when the last step is completed
@@ -76,9 +79,32 @@ const IntroSliderStepSeven = () => {
             case 5:
                 return {
                     title: "What is Your Monthly Return Target?",
+                    heading: "You Can More!",
+                    description: "You have selected your monthly return target. Now you are all set!",
+                    image: require("@assets/images/sliderScreen/growth.png"), // Replace with your actual image path
+                };
+            case 6:
+                return {
+                    title: "What is Your Monthly Return Target?",
                     heading: "Excellent!",
                     description: "You have selected your monthly return target. Now you are all set!",
-                    image: require("@assets/images/sliderScreen/tick.png"), // Replace with your actual image path
+                    image: require("@assets/images/sliderScreen/success.png"), // Replace with your actual image path
+                };
+            case 7:
+                return {
+                    // title: "What is Your Monthly Return Target?",
+                    heading: "Check!",
+                    description:
+                        "Before using predictions for a specific League our team make sure that AI performs well with them. This can be easily checked by visiting the league or team page and reviewing completed matches.",
+                    image: require("@assets/images/sliderScreen/success.png"), // Replace with your actual image path
+                };
+            case 8:
+                return {
+                    title: "Do You Have Your Own Strategy?",
+                    heading: "Check!",
+                    description:
+                        "Before using predictions for a specific League our team make sure that AI performs well with them. This can be easily checked by visiting the league or team page and reviewing completed matches.",
+                    image: require("@assets/images/sliderScreen/strategy.png"), // Replace with your actual image path
                 };
             default:
                 return {};
@@ -86,6 +112,7 @@ const IntroSliderStepSeven = () => {
     };
 
     const renderStep = () => {
+        console.log(step);
         switch (step) {
             case 0:
                 return <ExperienceLevelStep onNext={handleNextStep} />;
@@ -100,7 +127,11 @@ const IntroSliderStepSeven = () => {
             case 5:
                 return <MonthlyReturnStep5 onNext={handleNextStep} />;
             case 6:
-                return <MonthlyReturnStep onNext={handleNextStep} />;
+                return <OddsStep6 onNext={handleNextStep} />;
+            case 7:
+                return <SpecialPredictionStep7 onNext={handleNextStep} />;
+            case 8:
+                return <OwnStrategyStep8 onNext={handleNextStep} />;
             default:
                 return <Text>All steps completed!</Text>;
         }
