@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     buttonText: {
-        color: "#fff",
+        color: "#000000",
         fontWeight: "bold",
         textAlign: "center",
     },
