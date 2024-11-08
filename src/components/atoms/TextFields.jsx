@@ -7,19 +7,33 @@ export default function TextFields({
     inputMode,
     value,
     onChangeText,
-    keyboardType = "default",
+    keyboardType,
     styles,
+    key,
+    onBlur,
+    onFocus,
+    ref,
+    onKeyPress,
+    autoFocus,
+    maxLength,
 }) {
     return (
         <TextInput
+            maxLength={maxLength}
+            onKeyPress={onKeyPress}
+            autoFocus={autoFocus}
+            ref={ref}
+            key={key}
             value={value}
             onChangeText={onChangeText}
             placeholder={`${placeholderValue}`}
             secureTextEntry={secureTextEntry}
-            inputMode={`${inputMode}`}
+            inputMode={inputMode}
             style={styles}
             placeholderTextColor={"#FFFFFF"}
-            keyboardType={`${keyboardType}`}
+            keyboardType={keyboardType}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
     );
 }

@@ -43,9 +43,13 @@ const sizes = {
     },
 };
 
-const Button = ({ onPress, title, variant = "primary", size = "medium", style, textStyle }) => {
+const Button = ({ onPress, title, variant = "primary", size = "medium", style, textStyle, disabled }) => {
     return (
-        <TouchableOpacity style={[styles.button, variants[variant], sizes[size], style]} onPress={onPress}>
+        <TouchableOpacity
+            style={[styles.button, variants[variant], sizes[size], style]}
+            onPress={onPress}
+            disabled={disabled}
+        >
             <Text
                 style={[
                     styles.buttonText,
